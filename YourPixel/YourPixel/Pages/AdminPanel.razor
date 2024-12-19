@@ -1,0 +1,43 @@
+﻿@page "/AdminPanel"
+
+@using Microsoft.AspNetCore.Authorization
+@using YourPixel.Components
+@using YourPixel.Services.Interfaces
+@inject IYourPixelFileService yourPixelFileService
+
+@attribute [Authorize]
+
+<h3>Admin Panel</h3>
+<AuthorizeView>
+
+@* 	Hi @context.User.Identity?.Name!
+ *@	<form @onsubmit="Submit">
+
+		<InputFile OnChange="OnInputFileChange" multiple/>
+		<button type="submit">Upload</button>
+
+	</form>
+
+	<table>
+        <tr>
+            <th>Name</th>
+            <th>Resolution</th>
+        </tr>
+		@foreach (var item in wallpapers)
+		{
+			<tr>
+				<td>@item.FileName</td>
+				<td>@($"{item.ImageResolution.Width} x {item.ImageResolution.Height}")</td>
+				<td>
+					<button @onclick="()=>Delete(item.FileName)">Delete</button>
+				</td>
+				<td>
+					<button @onclick="()=>renameModal.Open(item.FileName, wallpapers)">Rename</button>
+				</td>
+			</tr>
+		}
+
+	</table>
+	<RenameModal OnSubmit="OnRename" @ref=renameModal/> 
+</AuthorizeView>
+

@@ -1,0 +1,16 @@
+﻿@using YourPixel.Components
+@using YourPixel.Services.Interfaces
+@inject IYourPixelFileService yourPixelFileService
+
+<Modal @ref="modal">
+		<Title>Provide new File Name for @FileName</Title>
+		<Body>
+			<form @onsubmit="Submit">
+
+			<InputText @bind-Value="NewName" />
+				<button type="submit">Rename</button>
+
+			</form>
+		</Body>
+		<Footer></Footer>
+		</Modal>

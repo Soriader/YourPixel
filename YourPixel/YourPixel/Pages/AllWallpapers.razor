@@ -1,0 +1,37 @@
+﻿@page "/AllWallpapers"
+@using YourPixel.Core;
+@using System.Collections.Generic
+@using YourPixel.Services.Interfaces;
+
+@inject IYourPixelFileService wallpaperFileService
+
+<PageTitle>All Wallpapers</PageTitle>
+
+<a href="https://unsplash.com/wallpapers">Click here to find wallpapers</a>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-center">Table of wallpapers</h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-1" />
+        <div class="col-10">
+            <div class="container">
+                <div class="row">
+                    @foreach (var wallpaper in wallpapers)
+                    {
+                        <div class="col-3">
+                            <WallpaperApp.Components.WallpaperCard CardTitle="@wallpaper.FileName" ImageSource="@wallpaper.FullFileName" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-1" />
+    </div>
+</div>

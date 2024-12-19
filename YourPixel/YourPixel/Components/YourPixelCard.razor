@@ -1,0 +1,29 @@
+﻿
+<div class="card">
+    <div class="card-body" style="display: flex; flex-direction: column; justify-content: center; gap: 10px">
+        <h5 class="card-title">
+            @if (StrongCardTitle)
+            {
+                <strong>@CardTitle</strong>
+            }
+            else
+            {
+                @CardTitle
+            }
+        </h5>
+        <img src="@ImageSource" class="card-img-bottom" />
+        <button class="btn btn-primary" style="background-color: green; margin: 0 10px">more details</button>
+    </div>
+</div>
+@code 
+{
+    [Parameter]
+    public string CardTitle { get; set; }
+    [Parameter]
+    public string ImageSource { get; set; }
+    [Parameter]
+    public bool StrongCardTitle { get; set; }
+    [Parameter]
+    public string ImageSize { get; set; } = "13 x 18 <br> 15 x 21 <br> 20 x 30";
+
+}
