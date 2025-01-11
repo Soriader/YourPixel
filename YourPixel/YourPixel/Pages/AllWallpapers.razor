@@ -2,6 +2,7 @@
 @using YourPixel.Core;
 @using System.Collections.Generic
 @using YourPixel.Services.Interfaces;
+@using YourPixel.Components;
 
 @inject IYourPixelFileService wallpaperFileService
 
@@ -26,7 +27,7 @@
                     @foreach (var wallpaper in wallpapers)
                     {
                         <div class="col-3">
-                            <WallpaperApp.Components.WallpaperCard CardTitle="@wallpaper.FileName" ImageSource="@wallpaper.FullFileName" />
+                            <YourPixelCard CardTitle="@wallpaper.FileName" ImageSource="@wallpaper.FullFileName" />
                         </div>
                     }
                 </div>

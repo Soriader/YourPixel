@@ -5,6 +5,9 @@ using YourPixel.Client.Pages;
 using YourPixel.Components;
 using YourPixel.Components.Account;
 using YourPixel.Data;
+using YourPixel.Services.Interfaces;
+using YourPixel.Services;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +40,9 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
 
+builder.Services.AddScoped<IYourPixelFileService, YourPixelFileService>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -55,6 +61,16 @@ else
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+               Path.Combine(
+                   Directory.GetCurrentDirectory(), "D://YourPixelAppPicture")),
+    RequestPath = "/StaticFiles"
+});
+
+
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
