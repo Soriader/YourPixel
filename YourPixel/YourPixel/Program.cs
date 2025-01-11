@@ -8,6 +8,7 @@ using YourPixel.Data;
 using YourPixel.Services.Interfaces;
 using YourPixel.Services;
 using Microsoft.Extensions.FileProviders;
+using YourPixel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +29,13 @@ builder.Services.AddAuthentication(options =>
 	})
 	.AddIdentityCookies();
 
+var creds = CredentialProvider.GetCredential("YourPixelCreds");
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+connectionString = connectionString.Replace("{User}", creds.Username);
+connectionString = connectionString.Replace("{Password}", creds.Password);
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();

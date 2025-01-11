@@ -1,4 +1,5 @@
-﻿using YourPixel.Core;
+﻿using YourPixel.Components;
+using YourPixel.Core;
 
 namespace YourPixel.Pages
 {
@@ -9,6 +10,8 @@ namespace YourPixel.Pages
         protected override async Task OnInitializedAsync()
         {
             wallpapers = await wallpaperFileService.GetWallpapers();
+            var x = CredentialProvider.GetCredential("YourPixelCreds");
+            var y = x;
         }
         public void DisplayMemes()
         {
