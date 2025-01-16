@@ -3,6 +3,8 @@
 @using Microsoft.AspNetCore.Authorization
 @using YourPixel.Components
 @using YourPixel.Services.Interfaces
+@using YourPixel.Core;
+@using System.Collections.Generic
 @inject IYourPixelFileService yourPixelFileService
 
 @attribute [Authorize]
@@ -10,8 +12,7 @@
 <h3>Admin Panel</h3>
 <AuthorizeView>
 
-@* 	Hi @context.User.Identity?.Name!
- *@	<form @onsubmit="Submit">
+ 	<form @onsubmit="Submit">
 
 		<InputFile OnChange="OnInputFileChange" multiple/>
 		<button type="submit">Upload</button>

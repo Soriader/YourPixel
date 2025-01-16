@@ -18,13 +18,14 @@ namespace YourPixel.Pages
 		}
 
 		IReadOnlyList<IBrowserFile> files;
-        async void OnInputFileChange(InputFileChangeEventArgs e)
+
+        public async void OnInputFileChange(InputFileChangeEventArgs e)
         {
             files = e.GetMultipleFiles();
             this.StateHasChanged();
         }
 
-        async void Submit()
+        public async void Submit()
         {
             foreach (var item in files)
             {
@@ -39,7 +40,7 @@ namespace YourPixel.Pages
             this.StateHasChanged();
 		}
 
-		async void Delete(string fileName)
+		public async void Delete(string fileName)
         {
 			var path = Path.Combine(PathOfFolder, fileName);
 
